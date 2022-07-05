@@ -1,31 +1,16 @@
 <script setup lang="ts">
 
 import {computed, ref} from "vue";
+import {useCalcStore} from "../store/calculator";
+import {storeToRefs} from "pinia";
 
-const form = ref({
-  people: 20,
-  price_student_pc: 500,
-  aux_quality: 1,
-  tech: false
-})
+const curr = (num: string|number) => {
+  return num.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })
+}
 
-const cost = computed(() => {
-  const positions_once= [
-    {amount: form.value.people * form.value.price_student_pc, name: 'Computer'},
-    ...Object.values({ ...( form.value.aux_quality > 0 && [ {amount: form.value.aux_quality * 3000 , name: 'Auxiliary'}]) }),
-    ...Object.values({ ...( form.value.tech && [{amount: 3000 , name: 'Tech infrastructure'}]) })
-  ]
-  return {
-    once: {
-      positions: positions_once,
-      total: positions_once.reduce((p, c) => p + c.amount, 0)
-    },
-    yearly: {
-      total: 0,
-      positions: []
-    }
-  }
-})
+const calculator = useCalcStore()
+
+const {form, cost} = storeToRefs(calculator)
 
 const marks = (max: number, step: number = 1, min:number = 0, format: (value: number) => string = v => `${v}`) => {
   let mark: any = {}
@@ -43,28 +28,54 @@ const marks = (max: number, step: number = 1, min:number = 0, format: (value: nu
         <h1>Plan your digital Lab</h1>
       </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside width="250px">
           <div class="stick">
-            <h2>Kosten</h2>
-            <h3>Einmalig</h3>
-            <p class="cost" v-for="position in cost.once.positions">{{ position.name }}: {{ position.amount }} €</p>
-            <p class="cost total">{{ cost.once.total }} €</p>
+            <h2>Cost</h2>
+            <h3>Once</h3>
+            <el-tooltip
+                class="box-item"
+                effect="dark"
+                :content="position.tooltip"
+                placement="top"
+                v-for="position in cost.once.positions"
+            >
+              <p class="cost" >{{ position.name }}: {{ curr(position.amount) }}</p>
+            </el-tooltip>
+            <p class="cost total">{{ curr(cost.once.total) }}</p>
             <hr>
-            <h3>Jährlich</h3>
-            <p class="cost" v-for="position in cost.yearly.positions">{{ position.name }}: {{ position.amount }} €</p>
-            <p class="cost total">{{ cost.yearly.total }} €</p>
+            <h3>Yearly</h3>
+            <el-tooltip
+                class="box-item"
+                effect="dark"
+                :content="position.tooltip"
+                placement="top"
+                v-for="position in cost.yearly.positions"
+            >
+              <p class="cost" >{{ position.name }}: {{ curr(position.amount) }}</p>
+            </el-tooltip>
+            <p class="cost total">{{ curr(cost.yearly.total) }}</p>
+            <hr>
+            <h3>Per year</h3>
+            <p class="cost" v-for="(y, i) in cost.year">{{ i+1 }}. year {{ curr(y) }}</p>
           </div>
         </el-aside>
         <el-container>
           <el-main>
-            <h2>Cost Calculator</h2>
+            <div id="side_bar" class="clearfix">
+              <h2 style="float: left;">Cost Calculator</h2>
+              <el-button type="danger" size="large" class="rightBtn" @click.prevent="calculator.reset()">Reset</el-button>
+            </div>
+            <h3>Purchases</h3>
             <div class="slider-with-label">
               <span class="label">People</span>
               <el-slider v-model="form.people" show-input />
             </div>
             <div class="slider-with-label">
               <span class="label">Price per student PC</span>
-              <el-slider v-model="form.price_student_pc" show-input precision :max="3000" :marks="marks(3500, 1000, 500, v => `${v} €`)" />
+              <el-slider v-model="form.price_student_pc" show-input precision
+                         :max="3000" :marks="marks(3500, 1000, 500, curr)"
+                         :format-tooltip="curr"
+              />
             </div>
             <div class="slider-with-label">
               <span class="label">Quality of auxiliary equipment</span>
@@ -85,8 +96,37 @@ const marks = (max: number, step: number = 1, min:number = 0, format: (value: nu
                   inactive-text="Needs to be bought"
               />
             </div>
+            <hr>
+            <h3>Office</h3>
+            <div class="slider-with-label">
+              <span class="label">Square meter office</span>
+              <el-slider v-model="form.sq" show-input
+                         :max="1000" :marks="marks(1000, 300, 0, v => `${v} m²`)"
+                         :format-tooltip="v => `${v} m²`"
+              />
+            </div>
+            <div class="slider-with-label">
+              <span class="label">Monthly price per square meter</span>
+              <el-slider v-model="form.sq_price" show-input
+                         :max="30" :marks="marks(30, 10, 0, v => `${curr(v)} / m²`)"
+                         :format-tooltip="v => `${curr(v)} / m²`"
+              />
+            </div>
+            <hr>
+            <h3>Salaries</h3>
+            <div class="slider-with-label">
+              <span class="label">Salary E11</span>
+              <el-slider v-model="form.salary" show-stops :min="1" :max="6" :marks="marks(6, 1, 1)"/>
+            </div>
+            <div class="slider-with-label">
+              <span class="label">Trainer (Half time)</span>
+              <el-slider v-model="form.trainer" show-stops :min="0" :max="10" :marks="marks(10, 5)"/>
+            </div>
+            <div class="slider-with-label">
+              <span class="label">Administration (Quarter time)</span>
+              <el-slider v-model="form.admin" show-stops :min="0" :max="10" :marks="marks(10, 5)"/>
+            </div>
           </el-main>
-          <el-footer>Footer</el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -126,6 +166,7 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  margin-right: 15px;
 }
 .slider-with-label .el-slider {
   margin-top: 0;
@@ -146,5 +187,15 @@ body {
 }
 .slider-with-label .label + .el-switch {
   flex: 0 0 75%;
+}
+.clearfix {
+  overflow: auto;
+}
+.rightBtn {
+  margin-top: 0.23em;
+  float: right;
+  position: relative;
+  top: 10px;
+  right: 10px;
 }
 </style>
