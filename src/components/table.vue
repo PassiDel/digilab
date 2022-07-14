@@ -12,7 +12,7 @@ const {path, column, title} = defineProps<{
     string,
     number | string,
     string?
-  ],
+  ][],
   title: string
 }>()
 
