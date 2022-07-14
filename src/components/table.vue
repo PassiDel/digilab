@@ -7,12 +7,12 @@ import { onBeforeRouteLeave } from 'vue-router'
 
 const {path, column, title} = defineProps<{
   path: string,
-  column: [
-    string,
-    string,
-    number | string,
-    string?
-  ][],
+  column: {
+    key: string,
+    label: string,
+    width: number | string,
+    fix?: string
+  }[],
   title: string
 }>()
 
@@ -53,9 +53,9 @@ onBeforeRouteLeave( () => {
     <el-table :data="tableData" style="width: 100%" @row-dblclick="row => row.editing = true">
       <el-table-column type="index" label="#" :width="40" fixed />
       <el-table-column v-for="c in column"
-                       :prop="c[0]" :label="c[1]" :width="c[2]" :fixed="c[3] || false">
+                       :prop="c.key" :label="c.label" :width="c.width" :fixed="c.fix || false">
         <template #default="scope">
-          <Column :scope="scope" :prop="c[0]" />
+          <Column :scope="scope" :prop="c.key" />
         </template>
       </el-table-column>
 

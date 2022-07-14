@@ -5,10 +5,10 @@ import Table from "../components/table.vue";
 const path = 'marketing'
 const title = 'Marketing'
 const column = [
-  ['date', 'Date', 150, 'left'],
-  ['name', 'Date', 'auto', false],
-  ['state', 'Date', 150, false],
-  ['tag', 'Date', 150, 'right'],
+  {key: 'date', label: 'Date', width: 150, fix: 'left'},
+  {key: 'name', label: 'Date', width: 'auto'},
+  {key: 'state', label: 'Date', width: 150},
+  {key: 'tag', label: 'Date', width: 150, fix: 'right'},
 ]
 </script>
 

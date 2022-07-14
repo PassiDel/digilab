@@ -5,13 +5,13 @@ import Table from "../components/table.vue";
 const path = 'fundings'
 const title = 'Fundings'
 const column = [
-  ['date', 'Date', 150, 'left'],
-  ['name', 'Date', 'auto', false],
-  ['state', 'Date', 'auto', false],
-  ['city', 'Date', 'auto', false],
-  ['address', 'Date', 'auto', false],
-  ['zip', 'Zip', 'auto', false],
-  ['tag', 'Date', 80, 'right'],
+  {key: 'date', label: 'Date', width: 150, fix: 'left'},
+  {key: 'name', label: 'Date', width: 'auto'},
+  {key: 'state', label: 'Date', width: 'auto'},
+  {key: 'city', label: 'Date', width: 'auto'},
+  {key: 'address', label: 'Date', width: 'auto'},
+  {key: 'zip', label: 'Zip', width: 'auto'},
+  {key: 'tag', label: 'Date', width: 80, fix: 'right'},
 ]
 </script>
 
