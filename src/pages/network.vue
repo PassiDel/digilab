@@ -6,8 +6,8 @@ const path = 'network'
 const title = 'Network'
 const column = [
   ['date', 'Date', 150, 'left'],
-  ['name', 'Date', 'auto'],
-  ['state', 'Date', 150],
+  ['name', 'Date', 'auto', false],
+  ['state', 'Date', 150, false],
   ['tag', 'Date', 150, 'right'],
 ]
 </script>
