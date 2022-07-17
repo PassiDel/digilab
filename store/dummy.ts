@@ -200,27 +200,27 @@ const initialValue = {
 export const useDummyStore = defineStore({
     id: 'dummy',
     state: () => ({
-        fundings: useStorage('dummy.fundings', initialValue.fundings),
-        furniture: useStorage('dummy.furniture', initialValue.furniture),
-        contacts: useStorage('dummy.contacts', initialValue.contacts),
-        hardware: useStorage('dummy.hardware', initialValue.hardware),
-        marketing: useStorage('dummy.marketing', initialValue.marketing),
-        network: useStorage('dummy.network', initialValue.network),
-        place: useStorage('dummy.place', initialValue.place),
-        staff: useStorage('dummy.staff:', initialValue.staff),
-        workshops: useStorage('dummy.workshops', initialValue.workshops)
+        fundings: useStorage('dummy.fundings', JSON.parse(JSON.stringify(initialValue.fundings))),
+        furniture: useStorage('dummy.furniture', JSON.parse(JSON.stringify(initialValue.furniture))),
+        contacts: useStorage('dummy.contacts', JSON.parse(JSON.stringify(initialValue.contacts))),
+        hardware: useStorage('dummy.hardware', JSON.parse(JSON.stringify(initialValue.hardware))),
+        marketing: useStorage('dummy.marketing', JSON.parse(JSON.stringify(initialValue.marketing))),
+        network: useStorage('dummy.network', JSON.parse(JSON.stringify(initialValue.network))),
+        place: useStorage('dummy.place', JSON.parse(JSON.stringify(initialValue.place))),
+        staff: useStorage('dummy.staff', JSON.parse(JSON.stringify(initialValue.staff))),
+        workshops: useStorage('dummy.workshops', JSON.parse(JSON.stringify(initialValue.workshops)))
     }),
     actions: {
         reset() {
-            this.fundings = [...initialValue.fundings]
-            this.furniture = [...initialValue.furniture]
-            this.contacts = [...initialValue.contacts]
-            this.hardware = [...initialValue.hardware]
-            this.marketing = [...initialValue.marketing]
-            this.network = [...initialValue.network]
-            this.place = [...initialValue.place]
-            this.staff = [...initialValue.staff]
-            this.workshops = [...initialValue.workshops]
+            this.fundings = JSON.parse(JSON.stringify(initialValue.fundings))
+            this.furniture = JSON.parse(JSON.stringify(initialValue.furniture))
+            this.contacts = JSON.parse(JSON.stringify(initialValue.contacts))
+            this.hardware = JSON.parse(JSON.stringify(initialValue.hardware))
+            this.marketing = JSON.parse(JSON.stringify(initialValue.marketing))
+            this.network = JSON.parse(JSON.stringify(initialValue.network))
+            this.place = JSON.parse(JSON.stringify(initialValue.place))
+            this.staff = JSON.parse(JSON.stringify(initialValue.staff))
+            this.workshops = JSON.parse(JSON.stringify(initialValue.workshops))
         },
         clear() {
             this.fundings = []
