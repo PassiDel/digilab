@@ -5,10 +5,11 @@ import Table from "../components/table.vue";
 const path = 'contacts'
 const title = 'Contacts'
 const column = [
-  {key: 'date', label: 'Date', width: 150, fix: 'left'},
-  {key: 'name', label: 'Date', width: 'auto'},
-  {key: 'state', label: 'Date', width: 150},
-  {key: 'tag', label: 'Date', width: 150, fix: 'right'},
+  {key: 'name', label: 'Name', width: 150},
+  {key: 'address', label: 'Address', width: 'auto'},
+  {key: 'tel', label: 'Telephone', width: 150},
+  {key: 'function', label: 'Function', width: 150},
+  {key: 'notes', label: 'Notes', width: 'auto'},
 ]
 </script>
 

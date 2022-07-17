@@ -5,10 +5,12 @@ import Table from "../components/table.vue";
 const path = 'place'
 const title = 'Place'
 const column = [
-  {key: 'date', label: 'Date', width: 150, fix: 'left'},
-  {key: 'name', label: 'Date', width: 'auto'},
-  {key: 'state', label: 'Date', width: 150},
-  {key: 'tag', label: 'Date', width: 150, fix: 'right'},
+  {key: 'address', label: 'Address', width: 'auto'},
+  {key: 'total', label: 'Total sqm', width: 150},
+  {key: 'usable', label: 'Usable sqm', width: 150},
+  {key: 'rooms', label: 'Rooms', width: 150},
+  {key: 'price', label: 'Price / month', width: 150},
+  {key: 'notes', label: 'Notes', width: 'auto'},
 ]
 </script>
 
