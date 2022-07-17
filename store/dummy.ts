@@ -189,7 +189,11 @@ const initialValue = {
             position: 'IT'
         },
     ],
-    workshops: []
+    workshops: [
+        {type: 'Course', name: '3D Printing with fun', responsible: 'Thorsten Gärtner', max: '10', date: 'Monday 5 pm', duration: '90 min'},
+        {type: 'Open Lab', name: 'Open Lab', responsible: 'Frank Krüger', max: '15', date: 'Saturday 11 am', duration: '2 h'},
+        {type: 'Course', name: 'Learning Python', responsible: 'Thorsten Gärtner', max: '24', date: 'Thursday 7pm', duration: '90 min'},
+    ]
 
 }
 
