@@ -1,1 +1,0 @@
-import{_ as t,E as _,o,c,w as n,p as s,a as d,b as r}from"./index.3fbfe352.js";const p={},l=e=>(s("data-v-6506a822"),e=e(),d(),e),i=l(()=>r("h3",null,"BUILD YOUR DIGITAL LAB",-1));function x(e,u){const a=_;return o(),c(a,null,{default:n(()=>[i]),_:1})}var h=t(p,[["render",x],["__scopeId","data-v-6506a822"]]);export{h as default};
