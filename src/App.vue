@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import SideButton from "./components/sideButton.vue";
+import {useDummyStore} from "../store/dummy";
+const dummy = useDummyStore()
 </script>
 
 <template>
@@ -24,6 +26,7 @@ import SideButton from "./components/sideButton.vue";
           <side-button to="/marketing">Marketing</side-button>
           <side-button to="/network">Network</side-button>
           <side-button to="/contacts">Contacts</side-button>
+          <el-button type="danger" :plain="true" size="large" class="resetBtn" @click="dummy.reset()">Reset</el-button>
         </el-aside>
         <el-container style="margin: 10px; border: solid black 2px">
           <router-view></router-view>
@@ -65,5 +68,9 @@ body {
   row-gap: 10px;
   padding: 12px;
   background-color: var(--el-text-color-regular);
+}
+.resetBtn {
+  margin-top: 3rem;
+  width: 50%;
 }
 </style>
