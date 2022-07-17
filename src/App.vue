@@ -26,7 +26,12 @@ const dummy = useDummyStore()
           <side-button to="/marketing">Marketing</side-button>
           <side-button to="/network">Network</side-button>
           <side-button to="/contacts">Contacts</side-button>
-          <el-button type="danger" :plain="true" size="large" class="resetBtn" @click="dummy.reset()">Reset</el-button>
+          <router-link to="" class="resetBtn" style="margin-top: 3rem" @click.prevent="">
+            <el-button type="danger" :plain="true" size="large" @click.prevent="dummy.reset()">Reset</el-button>
+          </router-link>
+          <router-link to="" class="resetBtn">
+            <el-button type="danger" :plain="true" size="large" @click="dummy.clear()">Clear</el-button>
+          </router-link>
         </el-aside>
         <el-container style="margin: 10px; border: solid black 2px">
           <router-view></router-view>
@@ -70,7 +75,9 @@ body {
   background-color: var(--el-text-color-regular);
 }
 .resetBtn {
-  margin-top: 3rem;
-  width: 50%;
+  text-decoration: none;
+}
+.resetBtn .el-button {
+  width: 200px;
 }
 </style>

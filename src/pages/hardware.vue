@@ -5,11 +5,12 @@ import Table from "../components/table.vue";
 const path = 'hardware'
 const title = 'Hardware'
 const column = [
-    // typ, marke, preis, stück
-  {key: 'date', label: 'Date', width: 150, fix: 'left'},
-  {key: 'name', label: 'Date', width: 'auto'},
-  {key: 'state', label: 'Date', width: 150},
-  {key: 'tag', label: 'Date', width: 150, fix: 'right'},
+  {key: 'type', label: 'Type', width: 150, fix: 'left'},
+  {key: 'vendor', label: 'Vendor', width: 150},
+  {key: 'name', label: 'Name', width: 200},
+  {key: 'price', label: 'Price', width: 150},
+  {key: 'amount', label: 'Amount', width: 150},
+  {key: 'notes', label: 'Notes', width: 'auto'},
 ]
 </script>
 

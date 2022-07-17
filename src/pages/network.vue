@@ -8,9 +8,9 @@ const column = [
   {key: 'name', label: 'Name', width: 150, fix: 'left'},
   {key: 'area', label: 'Area', width: 150},
   {key: 'address', label: 'Address', width: 'auto'},
-  {key: 'email', label: 'Email', width: 150},
+  {key: 'email', label: 'Email', width: 300},
   {key: 'tel', label: 'Telephone', width: 150},
-  {key: 'Notes', label: 'Notes', width: 'auto'},
+  {key: 'notes', label: 'Notes', width: 'auto'},
 ]
 </script>
 
